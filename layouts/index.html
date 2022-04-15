@@ -48,18 +48,18 @@
         </ul>
       </div>
       <div class="results-container">
-        <p>{{ len (where .Site.RegularPages ".Type" "partners") }} résultats</p>
+        <p>{{ len (where .Site.RegularPages ".Type" "ressources") }} résultats</p>
         <div class="card-container">
           {{/*  {{- range where .Site.RegularPages ".Type" "partners" -}}  */}}
           {{- range .Paginator.Pages -}}
           <div class="card">
             <a class="speaker-card" href="{{ .Permalink }}">
-              <h3>{{- .Params.title }}</h3>
-              <p>{{- .Params.description -}}</p>
-              {{ if not ( in .Params.regions "Sélectionnez une région") }}
+              <img src="../../static/assets/images/ressources/{{ .Params.image }}" alt="">
+              <h5>{{ .Params.title }}</h5> 
+              
               <small class="place">{{- range .GetTerms "regions" -}}{{ .Title }}{{ end }}</small>
-              {{ end }}
-              <small class="computer">{{- .Params.remote -}}</small>
+
+              <small class="computer">{{- .Params.description -}}</small>
               <ul class="domains custom-ul">
                 {{ range .GetTerms "domains" }}
                 <li>
