@@ -50,25 +50,29 @@
       <div class="results-container">
         <p>{{ len (where .Site.RegularPages ".Type" "ressources") }} résultats</p>
         <div class="card-container">
-          {{/*  {{- range where .Site.RegularPages ".Type" "partners" -}}  */}}
           {{- range .Paginator.Pages -}}
           <div class="card">
             <a class="speaker-card" href="{{ .Permalink }}">
-              <img src="../../static/assets/images/ressources/{{ .Params.image }}" alt="">
+              <img src="/assets/images/ressources/{{ .Params.image }}" alt="" class="card-img">
               <h5>{{ .Params.title }}</h5> 
-              
-              <small class="place">{{- range .GetTerms "regions" -}}{{ .Title }}{{ end }}</small>
-
-              <small class="computer">{{- .Params.description -}}</small>
               <ul class="domains custom-ul">
-                {{ range .GetTerms "domains" }}
+                {{ range .GetTerms "subjects" }}
                 <li>
                   <small class="dot green-dot">
                     {{ .Title }}
                   </small>
                 </li>
                 {{ end }}
-              </ul>
+                {{ range .GetTerms "types" }}
+                <li>
+                  <small class="dot green-dot">
+                    {{ .Title }}
+                  </small>
+                </li>
+                {{ end }}
+              </ul> 
+              <small>{{- .Params.description -}}</small>
+              <a href="{{ .Params.link }}" target="_blank" class="link-ressource">Revoir le live</a>
             </a>
           </div>
           {{- end -}}
